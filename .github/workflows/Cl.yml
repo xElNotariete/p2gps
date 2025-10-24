@@ -10,7 +10,6 @@ jobs:
       contents: write
       packages: write
 
-      
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4 #descarga el repositorio en el ejecutor
