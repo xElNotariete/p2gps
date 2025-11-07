@@ -12,38 +12,38 @@
 # Gradle
 .gradle
 **/build/**
- 
-# Ignore Gradle GUI config 
-gradle-app.setting 
 
-## Directory-based project format: 
-.idea/ 
+# Ignore Gradle GUI config
+gradle-app.setting
 
- 
-# Mongo Explorer plugin: 
-# .idea/mongoSettings.xml 
+## Directory-based project format:
+.idea/
 
- 
-## File-based project format: 
-*.ipr 
-*.iws 
 
- 
-## Plugin-specific files: 
- 
-# IntelliJ 
-out/ 
- 
-# mpeltonen/sbt-idea plugin 
-.idea_modules/ 
+# Mongo Explorer plugin:
+# .idea/mongoSettings.xml
 
- 
-# JIRA plugin 
-atlassian-ide-plugin.xml 
- 
- 
-# Crashlytics plugin (for Android Studio and IntelliJ) 
-com_crashlytics_export_strings.xml 
+
+## File-based project format:
+*.ipr
+*.iws
+
+
+## Plugin-specific files:
+
+# IntelliJ
+out/
+
+# mpeltonen/sbt-idea plugin
+.idea_modules/
+
+
+# JIRA plugin
+atlassian-ide-plugin.xml
+
+
+# Crashlytics plugin (for Android Studio and IntelliJ)
+com_crashlytics_export_strings.xml
 
 # Mac
 .DS_Store
@@ -65,3 +65,6 @@ buildinfo.properties
 
 _site
 
+# Docker drop folders - binarios generados por CI
+deploy/docker/Clients/drop/*.war
+deploy/docker/Order/drop/*.jar
