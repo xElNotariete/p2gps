@@ -68,3 +68,6 @@ _site
 # Docker drop folders - binarios generados por CI
 deploy/docker/Clients/drop/*.war
 deploy/docker/Order/drop/*.jar
+
+./deploy/aci-multi-container.yml
+

@@ -1,0 +1,63 @@
+apiVersion: 2018-10-01
+location: spaincentral
+name: p2gps-multicontainer
+properties:
+  containers:
+  - name: mongo
+    properties:
+      image: acrgps<tuid>.azurecr.io/p2gps:db
+      resources:
+        requests:
+          cpu: 0.15
+          memoryInGb: 0.2
+      ports:
+      - port: 27017
+      - port: 28017
+      volumeMounts:
+      - name: db-data
+        mountPath: /data/db
+  - name: order
+    properties:
+      image: acrgps<tuid>.azurecr.io/p2gps:order
+      resources:
+        requests:
+          cpu: 0.3
+          memoryInGb: 0.5
+      ports:
+      - port: 8080
+      #sobreescribmos las variables de entorno de application.properties.
+      #en ACI, no se puede descubrir un servicio por nombre, y todos los contenedores están en localhost
+      environmentVariables:
+      - name: MONGODB_HOST
+        value: localhost
+      - name: MONGODB_DATABASE
+        value: ordering
+  - name: web
+    properties:
+      image: acrgps<tuid>.azurecr.io/p2gps:web
+      resources:
+        requests:
+          cpu: 0.25
+          memoryInGb: 0.3
+      ports:
+      - port: 8082
+      environmentVariables: []
+  osType: Linux
+  imageRegistryCredentials:
+  - server: acrgps<tuid>.azurecr.io
+    username: "nombretoken"
+    password: "<REMOVED_FROM_REPO_PLEASE_ROTATE>"
+  ipAddress:
+    type: Public
+    ports:
+    - protocol: tcp
+      port: 8080
+    - protocol: tcp
+      port: 8082
+    - protocol: tcp
+      port: 27017
+    - protocol: tcp
+      port: 28017
+  volumes:
+  - name: db-data
+    emptyDir: {}
