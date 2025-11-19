@@ -45,7 +45,7 @@ properties:
   osType: Linux
   imageRegistryCredentials:
   - server: acrgps<tuid>.azurecr.io
-    username: "nombretoken"
+    username: "tokenPull"
     password: "<REMOVED_FROM_REPO_PLEASE_ROTATE>"
   ipAddress:
     type: Public
