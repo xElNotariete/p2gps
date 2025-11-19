@@ -58,10 +58,10 @@ jobs:
 
       - name: Etiquetar imágenes para ACR
         run: |
-          docker tag p2gps/web ${{ secrets.ACR_LOGIN_SERVER }}/p2gps25:web
-          docker tag p2gps/order ${{ secrets.ACR_LOGIN_SERVER }}/p2gps25:order
+          docker tag p2gps/web ${{ secrets.ACR_LOGIN_SERVER }}/samuelnotario:web
+          docker tag p2gps/order ${{ secrets.ACR_LOGIN_SERVER }}/samuelnotario:order
 
       - name: Push a ACR
         run: |
-          docker push ${{ secrets.ACR_LOGIN_SERVER }}/p2gps:order
-          docker push ${{ secrets.ACR_LOGIN_SERVER }}/p2gps:web
+          docker push ${{ secrets.ACR_LOGIN_SERVER }}/samuelnotario:order
+          docker push ${{ secrets.ACR_LOGIN_SERVER }}/samuelnotario:web
