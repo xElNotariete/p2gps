@@ -1,0 +1,57 @@
+version: "3"
+services:
+  # Base de Datos: MongoDB
+  mongo:
+    image: samuelnotario/p2gps:db
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: "0.15"
+          memory: 200M
+      restart_policy:
+        condition: on-failure
+    ports:
+      # Mapeo de puertos del contenedor (derecha) al host (izquierda)
+      - "28017:28017"
+      - "27017:27017"
+    volumes:
+      # Persistencia de datos
+      - db-data:/data/db
+
+  # Microservicio de Órdenes
+  order:
+    image: samuelnotario/p2gps:order
+    depends_on:
+      # Asegura que 'mongo' se inicie antes que 'order'
+      - mongo
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: 500M
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "8080:8080" # El servicio expone su puerto interno 8080 al puerto 8080 del host
+
+  # Interfaz Web / Frontend
+  web:
+    image: samuelnotario/p2gps:web
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: 300M
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "80:8080" # Mapea el puerto HTTP estándar (80) del host al puerto 8080 del contenedor
+
+# Definición de volúmenes
+volumes:
+  db-data:
+    # Esta línea estaba incompleta en el original, se deja con una definición simple.
+    # El volumen 'db-data' se usa para persistir los datos de MongoDB.
